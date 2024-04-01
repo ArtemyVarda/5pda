@@ -2,14 +2,14 @@
 
 namespace app\models;
 
-use app\entity\Users;
+use app\repository\UsersRepository;
 use yii\base\Model;
 
 class UserForm extends Model
 {
     public $login;
     public $password;
-    public $_user;
+    public $_user = false;
 
     public function rules()
     {
@@ -35,7 +35,7 @@ class UserForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Users::findUserByLogin($this->login);
+            $this->_user = UsersRepository::getUserByLogin($this->login);
         }
         return $this->_user;
     }

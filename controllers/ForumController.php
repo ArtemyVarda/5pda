@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+
 use app\models\SectionForm;
 use app\repository\ForumRepository;
 use Yii;
@@ -10,9 +11,17 @@ class ForumController extends Controller
 {
     public function actionIndex()
     {
-        $this->view->title = 'Главная страница';
-        return $this->render('index', [
+        $this->view->title = "Главная страница";
+        return $this->render("index", [
             'sections' => ForumRepository::getSections()
+        ]);
+    }
+
+    public function actionSubsections()
+    {
+        $this->view->title = "Страница подразделов";
+        return $this->render("subsections", [
+            'subsections' => ForumRepository::getSubsections(Yii::$app->request->get('id'))
         ]);
     }
 
@@ -20,14 +29,32 @@ class ForumController extends Controller
     {
         $this->view->title = 'Создание раздела';
         $model = new SectionForm();
-        if ($model->load(Yii::$app->request->post() && $model->validate())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             ForumRepository::createSection(
                 $model->title,
-                $model->desc
+                $model->description
             );
             return $this->goHome();
         }
-        return $this->render('createSection', [
+        return $this->render("createSection", [
+            'model' => $model
+        ]);
+    }
+
+    public function actionCreateSubsection()
+    {
+        $this->view->title = 'Создание подраздела';
+        $model = new SectionForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            ForumRepository::createSubsection(
+                $model->title,
+                $model->description,
+                Yii::$app->request->get('id')
+
+            );
+            return $this->goHome();
+        }
+        return $this->render("createSubsection", [
             'model' => $model
         ]);
     }

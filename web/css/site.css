@@ -113,3 +113,28 @@ main {
     font-size: 0.8em;
     margin-top: 4px;
 }
+
+.forum_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forum_section {
+    width: 100%;
+    display: block;
+    height: max-content;
+    color: black;
+
+}
+
+.forum_sections {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.forum_section:hover {
+    background: #00000019;
+}

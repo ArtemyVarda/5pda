@@ -14,22 +14,22 @@ class m240320_155806_initDB extends Migration
             'photo'=>$this->string(),
         ]);
         $this->createTable('sections', [
-            'id'=>$this->primaryKey(),
-            'title'=>$this->string()->notNull(),
-            'descriptions'=>$this->text()->notNull(),
+            'id' => $this->primaryKey(),
+            'title' => $this->string()->notNull(),
+            'description' => $this->text()->notNull(),
         ]);
         $this->createTable('subsections', [
-            'id'=>$this->primaryKey(),
-            'title'=>$this->string()->notNull(),
-            'descriptions'=>$this->text()->notNull(),
-            'section_id'=>$this->integer()->notNull(),
+            'id' => $this->primaryKey(),
+            'title' => $this->string()->notNull(),
+            'description' => $this->text()->notNull(),
+            'section_id' => $this->integer()->notNull(),
         ]);
         $this->createTable('topics', [
-            'id'=>$this->primaryKey(),
-            'title'=>$this->string()->notNull(),
-            'descriptions'=>$this->text()->notNull(),
-            'subsection_id'=>$this->integer()->notNull(),
-            'user_id'=>$this->integer()->notNull(),
+            'id' => $this->primaryKey(),
+            'title' => $this->string()->notNull(),
+            'description' => $this->text()->notNull(),
+            'subsection_id' => $this->integer()->notNull(),
+            'user_id' => $this->integer()->notNull(),
         ]);
         $this->createTable('messages', [
             'id'=>$this->primaryKey(),

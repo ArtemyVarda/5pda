@@ -35,7 +35,7 @@ class UserController extends Controller
     {
         $this->view->title = 'Регистрация';
         $model = new RegistrationModel();
-        if ($model->load(Yii::$app->request->post() && $model->validate())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $userId = UsersRepository::createUser(
                 $model->login,
                 $model->password,

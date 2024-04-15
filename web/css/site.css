@@ -150,3 +150,43 @@ main {
     padding-left: 10px;
     border-left: 1px solid #ffffff;
 }
+
+.messages__wrapper form {
+    display: flex;
+    width: 100%;
+
+
+}
+
+.msgBtn {
+    margin-top: 8px;
+    height: 72px;
+    font-size: 20px;
+    width: 72px;
+    background: aqua;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.msgBtn:hover {
+    background: #0a73bb;
+}
+
+.messages__wrapper textarea {
+    width: 100%;
+    min-height: 4.5em;
+    display: block;
+    resize: vertical;
+    max-height: 10em;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    color: black;
+    flex: 1;
+}
+
+.messages__wrapper label {
+    display: none;
+}

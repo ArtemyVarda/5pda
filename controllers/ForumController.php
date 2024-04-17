@@ -19,12 +19,12 @@ class ForumController extends Controller
         ]);
     }
 
-    public function actionSubsections()
+    public function actionSubsections($id)
     {
-        $title = ForumRepository::getSectionsTitle(Yii::$app->request->get('id'));
+        $title = ForumRepository::getSectionsTitle($id);
         $this->view->title = $title;
         return $this->render("subsections", [
-            'subsections' => ForumRepository::getSubsections(Yii::$app->request->get('id'))
+            'subsections' => ForumRepository::getSubsections($id)
         ]);
     }
 
@@ -63,11 +63,11 @@ class ForumController extends Controller
         ]);
     }
 
-    public function actionTopics()
+    public function actionTopics($id)
     {
-        $title = ForumRepository::getSubsectionsTitle(Yii::$app->request->get('id'));
+        $title = ForumRepository::getSubsectionsTitle($id);
         $this->view->title = $title;
-        $topics = ForumRepository::getTopics(Yii::$app->request->get('id'));
+        $topics = ForumRepository::getTopics($id);
         return $this->render("topics", ['topics' => $topics]);
     }
 
@@ -88,13 +88,13 @@ class ForumController extends Controller
         return $this->render("createTopic", ['model' => $model]);
     }
 
-    public function actionMessages()
+    public function actionMessages($id)
     {
-        $title = ForumRepository::getTopicsTitle(Yii::$app->request->get('id'));
+        $title = ForumRepository::getTopicsTitle($id);
         $this->view->title = $title;
 
-        $messages = ForumRepository::getMessages(Yii::$app->request->get('id'));
-        $topicAuthor = UsersRepository::getUserById(ForumRepository::getTopicsAuthor(Yii::$app->request->get('id')));
+        $messages = ForumRepository::getMessages($id);
+        $topicAuthor = UsersRepository::getUserById(ForumRepository::getTopicsAuthor($id));
 
         $model = new MessageForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -105,5 +105,16 @@ class ForumController extends Controller
             );
         }
         return $this->render("messages", ['messages' => $messages, 'model' => $model, 'topicAuthor' => $topicAuthor->login]);
+    }
+
+    public function actionRandomTopic()
+    {
+        $allTopics = ForumRepository::getTopics();
+        $allId = [];
+        foreach ($allTopics as $topic) {
+            $allId[] = $topic->id;
+        }
+        $id = rand(1, count($allId)) - 1;
+        return $this->redirect("/forum/messages?id=$allId[$id]");
     }
 }

@@ -28,9 +28,9 @@ use yii\widgets\ActiveForm;
     <div class="messages__wrapper">
         <?php $msg = ActiveForm::begin() ?>
 
-        <?= $msg->field($model, 'text')->textarea(['placeholder' => 'Ваше сообщение']) ?>
+        <?= $msg->field($model, 'text')->textarea(['placeholder' => 'Ваше сообщение', 'value' => '']) ?>
 
-        <?= Html::submitButton('🐵🦄', ['class' => 'msgBtn']) ?>
+        <?= Html::submitButton('🐵🦄', ['class' => 'msgBtn', 'disabled' => Yii::$app->user->isGuest]) ?>
         <?php ActiveForm::end() ?>
     </div>
 </div>
